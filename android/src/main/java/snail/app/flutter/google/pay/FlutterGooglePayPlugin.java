@@ -4,30 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wallet.AutoResolveHelper;
-import com.google.android.gms.wallet.IsReadyToPayRequest;
-import com.google.android.gms.wallet.PaymentData;
-import com.google.android.gms.wallet.PaymentDataRequest;
-import com.google.android.gms.wallet.PaymentsClient;
-import com.google.android.gms.wallet.Wallet;
-import com.google.android.gms.wallet.WalletConstants;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
+import com.google.android.gms.wallet.*;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * FlutterGooglePayPlugin
@@ -38,6 +29,7 @@ public class FlutterGooglePayPlugin implements MethodCallHandler, PluginRegistry
     private final String METHOD_REQUEST_CUSTOM_PAYMENT = "request_payment_custom_payment";
     private final String METHOD_IS_AVAILABLE = "is_available";
     private final String KEY_METHOD = "method_name";
+    public static final String GOOGLE_PAY_CHANNEL_NAME = "google_pay_button";
 
     private Result mLastResult;
     private MethodCall mLastMethodCall;
@@ -82,6 +74,10 @@ public class FlutterGooglePayPlugin implements MethodCallHandler, PluginRegistry
         final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL_NAME);
         FlutterGooglePayPlugin plugin = new FlutterGooglePayPlugin(registrar.activity());
         registrar.addActivityResultListener(plugin);
+        registrar
+                .platformViewRegistry()
+                .registerViewFactory(
+                        GOOGLE_PAY_CHANNEL_NAME, new GooglePayButtonFactory(registrar));
         channel.setMethodCallHandler(plugin);
     }
 

@@ -1,10 +1,6 @@
 package snail.app.flutter.google.pay;
 
-import com.google.android.gms.wallet.CardRequirements;
-import com.google.android.gms.wallet.PaymentDataRequest;
-import com.google.android.gms.wallet.PaymentMethodTokenizationParameters;
-import com.google.android.gms.wallet.TransactionInfo;
-import com.google.android.gms.wallet.WalletConstants;
+import com.google.android.gms.wallet.*;
 
 import java.util.Arrays;
 

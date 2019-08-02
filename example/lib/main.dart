@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_google_pay/flutter_google_pay.dart';
+import 'package:flutter_google_pay/google_pay_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -80,18 +81,14 @@ class _MyAppState extends State<MyApp> {
           body: Builder(builder: (context) {
             scaffoldContext = context;
             return Center(
-                child: Column(
-              children: <Widget>[
-                FlatButton(
+              child: SizedBox(
+                height: 48,
+                width: 90,
+                child: GooglePayButton(
                   onPressed: _makeStripePayment,
-                  child: Text('Stripe pay'),
                 ),
-                FlatButton(
-                  onPressed: _makeCustomPayment,
-                  child: Text('Custom pay'),
-                ),
-              ],
-            ));
+              ),
+            );
           })),
     );
   }
