@@ -24,7 +24,7 @@ public class GooglePayButton implements PlatformView {
     private View createGooglePayButton() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(context.getResources().getIdentifier("googlepay_button_no_shadow", "layout", context.getPackageName()), null);
+        View view = inflater.inflate(context.getResources().getIdentifier("googlepay_button", "layout", context.getPackageName()), null);
         return view;
     }
 
